@@ -1,3 +1,9 @@
+<style>
+  h2, h3 {
+      margin: 0;
+  }
+</style>
+
 # Proposta de aplicação
 
 Aplicação para controle de cardápio e comandas de um restaurante, possibilitando que o cliente tenha acesso a um cardápio digital e possa fazer seu pedido através de uma aplicação web, enquanto o restaurante tem acesso a uma dashboard com os pedidos pendentes e suas respectivas mesas/clientes.
