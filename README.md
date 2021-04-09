@@ -121,7 +121,7 @@ userId: integer (User entity relation);
     Guilherme Augusto Reis de Campos
   </li>
   <li>
-    Bernardo Vaz Oliveira
+    Bernardo Vaz de Melo Oliveira
   </li>
 </ul>
 
