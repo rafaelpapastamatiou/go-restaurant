@@ -1,9 +1,3 @@
-<style>
-  h2, h3 {
-      margin: 0;
-  }
-</style>
-
 # Proposta de aplicação
 
 Aplicação para controle de cardápio e comandas de um restaurante, possibilitando que o cliente tenha acesso a um cardápio digital e possa fazer seu pedido através de uma aplicação web, enquanto o restaurante tem acesso a uma dashboard com os pedidos pendentes e suas respectivas mesas/clientes.
@@ -14,7 +8,7 @@ Ao fim do pedido, mediante pagamento do cliente, o garçom finaliza o pedido e �
 
 # Funcionalidades
 
-## Restaurante
+### Restaurante
 
 - Cadastrar usuários (garçoms / admin)
 - Autenticação
@@ -23,7 +17,7 @@ Ao fim do pedido, mediante pagamento do cliente, o garçom finaliza o pedido e �
 
 <br />
 
-## Cliente
+### Cliente
 
 - Exibição do cardápio
 - Fazer pedido
@@ -34,10 +28,6 @@ Ao fim do pedido, mediante pagamento do cliente, o garçom finaliza o pedido e �
 <br />
 
 # Entidades da aplicação
-
-## Authentication
-
-<br />
 
 ### User
 
@@ -52,12 +42,6 @@ password: string;
 
 admin: boolean (0/1);
 ```
-
-<br/>
-
-## Restaurant workflow
-
-<br />
 
 ### Category
 
