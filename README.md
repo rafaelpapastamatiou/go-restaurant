@@ -10,7 +10,7 @@ Ao fim do pedido, mediante pagamento do cliente, o garçom finaliza o pedido e �
 
 ### Restaurante
 
-- Cadastrar usuários (garçoms / admin)
+- Cadastrar usuários (garçons / admin)
 - Autenticação
 - Exibição dos pedidos em andamento
 - Finalização do pedido / emissão de invoice
@@ -91,7 +91,6 @@ orderId: integer (Order entity relation);
 dishId: integer (Dish entity relation);
 
 note: string;
-
 ```
 
 ### Invoice
