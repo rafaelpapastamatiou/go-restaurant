@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateOrderDTO } from '../../dtos/order/create-order.dto';
 import { OrderIdentifierDTO } from '../../dtos/order/order-identifier.dto';
@@ -10,7 +11,7 @@ import { OrderRepositoryInterface } from './order.repository.interface';
 export class OrderRepository
   extends Repository<Order>
   implements OrderRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<Order[]> {
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<Order[]> {
     const orders = await this.find({
       where: { accountId },
     });

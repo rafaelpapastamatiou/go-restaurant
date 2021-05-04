@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateDishDTO } from '../../dtos/dish/create-dish.dto';
 import { DishIdentifierDTO } from '../../dtos/dish/dish-identifier.dto';
@@ -11,14 +12,6 @@ import { DishRepositoryInterface } from './dish.repository.interface';
 export class DishRepository
   extends Repository<Dish>
   implements DishRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<Dish[]> {
-    const dishes = await this.find({
-      where: { accountId },
-    });
-
-    return dishes;
-  }
-
   async findById({ id, accountId }: DishIdentifierDTO): Promise<Dish> {
     const dish = await this.findOne({
       where: {
@@ -28,6 +21,16 @@ export class DishRepository
     });
 
     return dish;
+  }
+
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<Dish[]> {
+    const dishes = await this.find({
+      where: {
+        accountId,
+      },
+    });
+
+    return dishes;
   }
 
   async createDish({

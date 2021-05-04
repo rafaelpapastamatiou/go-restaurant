@@ -1,3 +1,4 @@
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateInvoiceDTO } from '../../dtos/invoice/create-invoice.dto';
 import { InvoiceIdentifierDTO } from '../../dtos/invoice/invoice-identifier.dto';
@@ -9,7 +10,7 @@ import { InvoiceRepositoryInterface } from './invoice.repository.interface';
 export class InvoiceRepository
   extends Repository<Invoice>
   implements InvoiceRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<Invoice[]> {
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<Invoice[]> {
     const invoices = await this.find({
       where: { accountId },
     });

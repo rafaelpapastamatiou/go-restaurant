@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { UserIdentifierDTO } from 'src/shared/dtos/user/user-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { AuthenticateDTO } from '../../dtos/auth/authenticate.dto';
@@ -13,7 +14,7 @@ import { UserRepositoryInterface } from './user.repository.interface';
 export class UserRepository
   extends Repository<User>
   implements UserRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<User[]> {
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<User[]> {
     const users = await this.find({
       where: { accountId },
     });

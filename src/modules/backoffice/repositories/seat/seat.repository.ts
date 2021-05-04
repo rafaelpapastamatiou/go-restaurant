@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateSeatDTO } from '../../dtos/seat/create-seat.dto';
 import { SeatIdentifierDTO } from '../../dtos/seat/seat-identifier.dto';
@@ -12,14 +13,6 @@ import { SeatRepositoryInterface } from './seat.repository.interface';
 export class SeatRepository
   extends Repository<Seat>
   implements SeatRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<Seat[]> {
-    const seats = await this.find({
-      where: { accountId },
-    });
-
-    return seats;
-  }
-
   async findById({ id, accountId }: SeatIdentifierDTO): Promise<Seat> {
     const seat = await this.findOne({
       where: {
@@ -40,6 +33,16 @@ export class SeatRepository
     });
 
     return seat;
+  }
+
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<Seat[]> {
+    const seats = await this.find({
+      where: {
+        accountId,
+      },
+    });
+
+    return seats;
   }
 
   async createSeat({ accountId, number }: CreateSeatDTO): Promise<Seat> {

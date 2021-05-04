@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
 import { CategoryIdentifierDTO } from '../../dtos/category/category-identifier.dto';
 import { CreateCategoryDTO } from '../../dtos/category/create-category.dto';
@@ -11,14 +12,6 @@ import { CategoryRepositoryInterface } from './category.repository.interface';
 export class CategoryRepository
   extends Repository<Category>
   implements CategoryRepositoryInterface {
-  async findByAccountId(accountId: number): Promise<Category[]> {
-    const categories = await this.find({
-      where: { accountId },
-    });
-
-    return categories;
-  }
-
   async findById({ id, accountId }: CategoryIdentifierDTO): Promise<Category> {
     const category = await this.findOne({
       where: {
@@ -28,6 +21,16 @@ export class CategoryRepository
     });
 
     return category;
+  }
+
+  async findAll({ accountId }: AccountIdentifierDTO): Promise<Category[]> {
+    const categories = await this.find({
+      where: {
+        accountId,
+      },
+    });
+
+    return categories;
   }
 
   async createCategory({
