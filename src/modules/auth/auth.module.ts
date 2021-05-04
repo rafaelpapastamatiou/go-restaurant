@@ -8,10 +8,20 @@ import { JwtStrategy } from 'src/shared/strategies/jwt.strategy';
 
 import { Account } from './entities/account.entity';
 import { User } from 'src/shared/decorators/user.decorator';
+import { AccountService } from './services/account.service';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { AccountRepository } from './repositories/account/account.repository';
+import { UserRepository } from './repositories/user/user.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Account, User]),
+    TypeOrmModule.forFeature([
+      Account,
+      AccountRepository,
+      User,
+      UserRepository,
+    ]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       inject: [ConfigService],
@@ -21,7 +31,8 @@ import { User } from 'src/shared/decorators/user.decorator';
       }),
     }),
   ],
-  exports: [JwtModule, PassportModule],
-  providers: [JwtStrategy],
+  controllers: [],
+  exports: [JwtModule, PassportModule, AuthService],
+  providers: [JwtStrategy, AccountService, AuthService, UserService],
 })
 export class AuthModule {}
