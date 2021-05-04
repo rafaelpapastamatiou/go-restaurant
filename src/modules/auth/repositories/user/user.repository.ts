@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { UserIdentifierDTO } from 'src/shared/dtos/user/user-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
+import { AuthenticateDTO } from '../../dtos/auth/authenticate.dto';
 import { CreateUserDTO } from '../../dtos/user/create-user.dto';
 import { UpdateUserDTO } from '../../dtos/user/update-user.dto';
 import { UserEmailIdentifierDTO } from '../../dtos/user/user-email-identifier.dto';
@@ -40,7 +41,26 @@ export class UserRepository
         email,
         accountId,
       },
+      relations: ['account'],
     });
+
+    return user;
+  }
+
+  async findWithCredentials({
+    email,
+    password,
+    accountId,
+  }: AuthenticateDTO): Promise<User> {
+    const user = await this.findByEmail({ email, accountId });
+
+    if (!user) {
+      throw new HttpException('Invalid credentials.', HttpStatus.BAD_REQUEST);
+    }
+
+    if (!user.comparePassword(password)) {
+      throw new HttpException('Invalid credentials.', HttpStatus.BAD_REQUEST);
+    }
 
     return user;
   }

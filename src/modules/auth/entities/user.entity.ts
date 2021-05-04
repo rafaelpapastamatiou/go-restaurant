@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 
 import { Invoice } from 'src/modules/restaurant/entities/invoice.entity';
 import { Account } from './account.entity';
@@ -24,6 +25,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ type: 'boolean', default: 0 })
