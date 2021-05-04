@@ -11,6 +11,7 @@ import { RestaurantModule } from './modules/restaurant/restaurant.module';
 import { JwtAuthGuard } from './shared/guards/jwt-auth.guard';
 
 import { configuration } from './config/configuration';
+import { AuthService } from './modules/auth/services/auth.service';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { configuration } from './config/configuration';
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
+    AuthService,
   ],
 })
 export class AppModule {}

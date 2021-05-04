@@ -1,16 +1,7 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  ManyToMany,
-  JoinTable,
-  OneToMany,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
 import { Seat } from 'src/modules/backoffice/entities/seat.entity';
-import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { OrderDish } from './order-dish.entity';
 
 @Entity()

@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { Order } from './order.entity';
@@ -16,7 +9,10 @@ export class OrderDish {
   id: number;
 
   @Column()
-  note: string;
+  quantity: number;
+
+  @Column()
+  note?: string;
 
   @ManyToOne(() => Dish, (dish) => dish.orderDishes)
   dish: Dish;
