@@ -16,7 +16,9 @@ export class OrderDish {
 
   @ManyToOne(() => Dish, (dish) => dish.orderDishes)
   dish: Dish;
+  dishId: number;
 
   @ManyToOne(() => Order, (order) => order.orderDishes)
   order: Order;
+  orderId: number;
 }

@@ -2,11 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class UpdateOrderDishDTO {
-  @ApiProperty({ description: `Order dish id` })
-  @IsNumber()
-  id: number;
+import { OrderDishIdentifierDTO } from './order-dish-identifier.dto';
 
+export class UpdateOrderDishDTO extends OrderDishIdentifierDTO {
   @ApiProperty({ description: `Dish quantity` })
   @IsNumber()
   quantity?: number;
@@ -14,5 +12,5 @@ export class UpdateOrderDishDTO {
   @ApiProperty({ description: `Dish note` })
   @IsOptional()
   @IsString()
-  note?: number;
+  note?: string;
 }

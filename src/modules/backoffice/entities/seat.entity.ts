@@ -19,6 +19,7 @@ export class Seat {
 
   @ManyToOne(() => Account, (account) => account.dishes)
   account: Account;
+  accountId: number;
 
   @OneToMany(() => Order, (order) => order.seat)
   orders: Order[];

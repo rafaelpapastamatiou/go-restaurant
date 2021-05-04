@@ -16,7 +16,9 @@ export class Invoice {
 
   @ManyToOne(() => Account, (account) => account.invoices)
   account: Account;
+  accountId: number;
 
   @ManyToOne(() => User, (user) => user.invoices)
   user: User;
+  userId: number;
 }

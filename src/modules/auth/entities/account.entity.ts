@@ -20,9 +20,6 @@ export class Account {
   @Column()
   urlName: string;
 
-  @Column()
-  email: string;
-
   @OneToMany(() => User, (user) => user.account)
   users: User[];
 

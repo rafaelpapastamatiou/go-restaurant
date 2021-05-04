@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsString, IsNumber } from 'class-validator';
 
-import { UserIdentifierDTO } from 'src/modules/auth/dtos/auth/user-identifier.dto';
+import { UserIdentifierDTO } from 'src/shared/dtos/user/user-identifier.dto';
 
 export class CreateInvoiceDTO extends UserIdentifierDTO {
   @ApiProperty({ description: `Invoice value` })

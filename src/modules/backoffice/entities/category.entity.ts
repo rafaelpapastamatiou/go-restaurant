@@ -22,4 +22,5 @@ export class Category {
 
   @ManyToOne(() => Account, (account) => account.categories)
   account: Account;
+  accountId: number;
 }

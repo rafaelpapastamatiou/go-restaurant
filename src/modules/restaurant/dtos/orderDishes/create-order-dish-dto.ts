@@ -18,5 +18,5 @@ export class CreateOrderDishDTO {
   @ApiProperty({ description: `Dish note` })
   @IsOptional()
   @IsString()
-  note?: number;
+  note?: string;
 }
