@@ -1,73 +1,126 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Proposta de aplicação
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Aplicação para controle de cardápio e comandas de um restaurante, possibilitando que o cliente tenha acesso a um cardápio digital e possa fazer seu pedido através de uma aplicação web, enquanto o restaurante tem acesso a uma dashboard com os pedidos pendentes e suas respectivas mesas/clientes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Ao fim do pedido, mediante pagamento do cliente, o garçom finaliza o pedido e é gerado um "nota fiscal" simplificada.
 
-## Description
+<br />
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Funcionalidades
 
-## Installation
+### Restaurante
 
-```bash
-$ npm install
+- Cadastrar usuários (garçons / admin)
+- Autenticação
+- Exibição dos pedidos em andamento
+- Finalização do pedido / emissão de invoice
+
+<br />
+
+### Cliente
+
+- Exibição do cardápio
+- Fazer pedido
+- Pagar pedido
+- Dar gorjeta
+
+
+<br />
+
+# Entidades da aplicação
+
+### User
+
+```
+id: integer (auto generated);
+
+name: string;
+
+email: string;
+
+password: string;
+
+admin: boolean (0/1);
 ```
 
-## Running the app
+### Category
 
-```bash
-# development
-$ npm run start
+```
+id: integer (auto generated);
 
-# watch mode
-$ npm run start:dev
+name: string;
 
-# production mode
-$ npm run start:prod
+description: string;
 ```
 
-## Test
+### Dish
 
-```bash
-# unit tests
-$ npm run test
+```
+id: integer (auto generated);
 
-# e2e tests
-$ npm run test:e2e
+name: string;
 
-# test coverage
-$ npm run test:cov
+description: string;
+
+price: number;
+
+categoryId: integer (Category entity relation);
 ```
 
-## Support
+### Seat
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+id: integer (auto generated);
 
-## Stay in touch
+number: integer;
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Order
 
-## License
+```
+id: integer (auto generated);
 
-Nest is [MIT licensed](LICENSE).
+seatId: integer (Seat entity relation);
+```
+
+### OrderItems
+
+```
+orderId: integer (Order entity relation);
+
+dishId: integer (Dish entity relation);
+
+note: string;
+```
+
+### Invoice
+
+```
+orderId: integer (Order entity relation);
+
+value: number;
+
+client: string (cpf);
+
+userId: integer (User entity relation);
+```
+
+<br/>
+
+<h1>Integrantes do grupo</h1>
+
+<ul>
+  <li>
+    Rafael Papastamatiou Maia Rodrigues
+  </li>
+  <li>
+    Mateus do Paço Alvarenga Catão
+  </li>
+  <li>
+    Guilherme Augusto Reis de Campos
+  </li>
+  <li>
+    Bernardo Vaz de Melo Oliveira
+  </li>
+</ul>
+
