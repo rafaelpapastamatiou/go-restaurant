@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtStrategy } from 'src/shared/strategies/jwt.strategy';
 
 import { Account } from './entities/account.entity';
-import { User } from 'src/shared/decorators/user.decorator';
+import { User } from './entities/user.entity';
 import { AccountService } from './services/account.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';

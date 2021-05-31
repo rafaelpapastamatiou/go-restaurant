@@ -9,7 +9,7 @@ import {
 import { Account } from 'src/modules/auth/entities/account.entity';
 import { Dish } from './dish.entity';
 
-@Entity()
+@Entity('categories')
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;

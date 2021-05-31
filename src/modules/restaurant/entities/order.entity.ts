@@ -4,7 +4,7 @@ import { Account } from 'src/modules/auth/entities/account.entity';
 import { Seat } from 'src/modules/backoffice/entities/seat.entity';
 import { OrderDish } from './order-dish.entity';
 
-@Entity()
+@Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;

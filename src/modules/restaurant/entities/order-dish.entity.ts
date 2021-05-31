@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { Order } from './order.entity';
 
-@Entity()
+@Entity('order_dishes')
 export class OrderDish {
   @PrimaryGeneratedColumn()
   id: number;

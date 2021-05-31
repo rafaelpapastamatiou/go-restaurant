@@ -6,7 +6,7 @@ import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { Order } from 'src/modules/restaurant/entities/order.entity';
 import { Invoice } from 'src/modules/restaurant/entities/invoice.entity';
 
-@Entity()
+@Entity('accounts')
 export class Account {
   @PrimaryGeneratedColumn()
   id: number;

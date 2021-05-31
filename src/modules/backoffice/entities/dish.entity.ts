@@ -10,7 +10,7 @@ import { Account } from 'src/modules/auth/entities/account.entity';
 import { Category } from './category.entity';
 import { OrderDish } from 'src/modules/restaurant/entities/order-dish.entity';
 
-@Entity()
+@Entity('dishes')
 export class Dish {
   @PrimaryGeneratedColumn()
   id: number;

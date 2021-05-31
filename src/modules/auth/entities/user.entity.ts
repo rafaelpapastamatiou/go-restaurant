@@ -13,7 +13,7 @@ import { Exclude } from 'class-transformer';
 import { Invoice } from 'src/modules/restaurant/entities/invoice.entity';
 import { Account } from './account.entity';
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

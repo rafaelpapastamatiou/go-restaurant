@@ -9,7 +9,7 @@ import {
 import { Account } from 'src/modules/auth/entities/account.entity';
 import { Order } from 'src/modules/restaurant/entities/order.entity';
 
-@Entity()
+@Entity('seats')
 export class Seat {
   @PrimaryGeneratedColumn()
   id: number;
