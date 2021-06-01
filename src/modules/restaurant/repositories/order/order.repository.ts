@@ -35,12 +35,12 @@ export class OrderRepository
 
   async createOrder({
     accountId,
-    seatId,
+    tableId,
     orderDishes,
   }: CreateOrderDTO): Promise<Order> {
     const order = this.create({
       accountId,
-      seatId,
+      tableId,
       orderDishes,
     });
 

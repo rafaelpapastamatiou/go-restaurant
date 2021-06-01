@@ -8,9 +8,10 @@ export default class CreateCategory1622412913625 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true,
           },
           {
             name: 'name',
@@ -21,6 +22,18 @@ export default class CreateCategory1622412913625 implements MigrationInterface {
             name: 'accountId',
             type: 'int',
             isNullable: false,
+          },
+          {
+            name: 'createdAt',
+            type: 'datetime',
+            isNullable: false,
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'updatedAt',
+            type: 'datetime',
+            isNullable: true,
+            default: null,
           },
         ],
         foreignKeys: [

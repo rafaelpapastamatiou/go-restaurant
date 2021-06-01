@@ -7,9 +7,9 @@ import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier
 import { OrderDish } from '../../entities/order-dish.entity';
 
 export class CreateOrderDTO extends AccountIdentifierDTO {
-  @ApiProperty({ description: `Order seat id` })
+  @ApiProperty({ description: `Order table id` })
   @IsNumber()
-  seatId: number;
+  tableId: number;
 
   @ApiProperty({ description: `Order dishes` })
   @IsOptional()

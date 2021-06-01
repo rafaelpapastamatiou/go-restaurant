@@ -8,12 +8,13 @@ export default class CreateOrder1622414076738 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true,
           },
           {
-            name: 'seatId',
+            name: 'tableId',
             type: 'int',
             isNullable: false,
           },
@@ -21,6 +22,18 @@ export default class CreateOrder1622414076738 implements MigrationInterface {
             name: 'accountId',
             type: 'int',
             isNullable: false,
+          },
+          {
+            name: 'createdAt',
+            type: 'datetime',
+            isNullable: false,
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'updatedAt',
+            type: 'datetime',
+            isNullable: true,
+            default: null,
           },
         ],
         foreignKeys: [
@@ -33,9 +46,9 @@ export default class CreateOrder1622414076738 implements MigrationInterface {
             name: 'OrderAccount',
           },
           {
-            columnNames: ['seatId'],
+            columnNames: ['tableId'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'seats',
+            referencedTableName: 'tables',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
             name: 'OrderAccount',

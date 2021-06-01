@@ -8,9 +8,10 @@ export default class CreateAccount1622412185649 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true,
           },
           {
             name: 'name',
@@ -23,9 +24,21 @@ export default class CreateAccount1622412185649 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'urlName',
+            name: 'accountUrl',
             type: 'varchar',
             isNullable: false,
+          },
+          {
+            name: 'createdAt',
+            type: 'datetime',
+            isNullable: false,
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'updatedAt',
+            type: 'datetime',
+            isNullable: true,
+            default: null,
           },
         ],
       }),

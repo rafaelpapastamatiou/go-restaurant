@@ -9,9 +9,10 @@ export default class CreateOrderDish1622414155345
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true,
           },
           {
             name: 'quantity',
@@ -33,6 +34,18 @@ export default class CreateOrderDish1622414155345
             name: 'orderId',
             type: 'int',
             isNullable: false,
+          },
+          {
+            name: 'createdAt',
+            type: 'datetime',
+            isNullable: false,
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'updatedAt',
+            type: 'datetime',
+            isNullable: true,
+            default: null,
           },
         ],
         foreignKeys: [

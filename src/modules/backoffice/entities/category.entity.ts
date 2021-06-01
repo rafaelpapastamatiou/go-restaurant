@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
@@ -16,6 +18,12 @@ export class Category {
 
   @Column()
   name: string;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   @OneToMany(() => Dish, (dish) => dish.category)
   dishes: Dish[];

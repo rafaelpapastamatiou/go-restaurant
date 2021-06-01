@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { Order } from './order.entity';
@@ -13,6 +20,12 @@ export class OrderDish {
 
   @Column()
   note?: string;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   @ManyToOne(() => Dish, (dish) => dish.orderDishes)
   dish: Dish;

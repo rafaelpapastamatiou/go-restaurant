@@ -67,7 +67,7 @@ price: number;
 categoryId: integer (Category entity relation);
 ```
 
-### Seat
+### Table
 
 ```
 id: integer (auto generated);
@@ -80,7 +80,7 @@ number: integer;
 ```
 id: integer (auto generated);
 
-seatId: integer (Seat entity relation);
+tableId: integer (Table entity relation);
 ```
 
 ### OrderItems

@@ -4,6 +4,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
@@ -20,6 +22,12 @@ export class Dish {
 
   @Column()
   price: number;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   @ManyToOne(() => Category, (category) => category.dishes)
   category: Category;

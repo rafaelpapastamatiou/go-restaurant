@@ -21,6 +21,12 @@ export class AccountService {
     return account;
   }
 
+  async findByAccountUrl(accountUrl: string): Promise<Account> {
+    const account = await this.accountRepository.findByAccountUrl(accountUrl);
+
+    return account;
+  }
+
   async create(data: CreateAccountDTO): Promise<Account> {
     const account = await this.accountRepository.createAccount(data);
 

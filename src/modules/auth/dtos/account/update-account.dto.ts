@@ -18,5 +18,5 @@ export class UpdateAccountDTO extends AccountIdentifierDTO {
   @ApiProperty({ description: `Account name on url prefix` })
   @IsOptional()
   @IsString()
-  urlName?: string;
+  accountUrl?: string;
 }

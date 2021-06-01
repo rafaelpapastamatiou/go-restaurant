@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { User } from './user.entity';
 import { Category } from 'src/modules/backoffice/entities/category.entity';
@@ -18,9 +25,15 @@ export class Account {
   tradeName: string;
 
   @Column()
-  urlName: string;
+  accountUrl: string;
 
-  @OneToMany(() => User, (user) => user.account)
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
+
+  @OneToMany(() => User, (user) => user.account, { cascade: true })
   users: User[];
 
   @OneToMany(() => Category, (category) => category.account)

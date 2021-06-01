@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
 import { User } from 'src/modules/auth/entities/user.entity';
@@ -13,6 +20,12 @@ export class Invoice {
 
   @Column({ type: 'varchar', length: 11 })
   client: string;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   @ManyToOne(() => Account, (account) => account.invoices)
   account: Account;

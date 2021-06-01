@@ -18,10 +18,10 @@ export class AccountRepository
     return account;
   }
 
-  async findByAccountUrl(urlName: string): Promise<Account | undefined> {
+  async findByAccountUrl(accountUrl: string): Promise<Account | undefined> {
     const account = await this.findOne({
       where: {
-        urlName,
+        accountUrl,
       },
     });
 
@@ -31,11 +31,11 @@ export class AccountRepository
   async createAccount({
     email,
     password,
-    urlName,
+    accountUrl,
     ...values
   }: CreateAccountDTO): Promise<Account> {
     const accountWithSameUrlAlreadyExists = await this.findByAccountUrl(
-      urlName,
+      accountUrl,
     );
 
     if (accountWithSameUrlAlreadyExists) {
@@ -46,7 +46,7 @@ export class AccountRepository
     }
 
     const account = this.create({
-      urlName,
+      accountUrl,
       ...values,
       users: [
         {
@@ -65,7 +65,7 @@ export class AccountRepository
 
   async updateAccount({
     accountId,
-    urlName,
+    accountUrl,
     ...newValues
   }: UpdateAccountDTO): Promise<Account> {
     let account = await this.findById(accountId);
@@ -74,9 +74,9 @@ export class AccountRepository
       throw new HttpException('Account not found', HttpStatus.BAD_REQUEST);
     }
 
-    if (urlName) {
+    if (accountUrl) {
       const accountWithSameUrlAlreadyExists = await this.findByAccountUrl(
-        urlName,
+        accountUrl,
       );
 
       if (accountWithSameUrlAlreadyExists) {
@@ -86,7 +86,7 @@ export class AccountRepository
         );
       }
 
-      account.urlName = urlName;
+      account.accountUrl = accountUrl;
     }
 
     account = Object.assign(account, { ...newValues });

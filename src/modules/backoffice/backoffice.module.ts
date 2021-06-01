@@ -3,13 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Category } from './entities/category.entity';
 import { Dish } from './entities/dish.entity';
-import { Seat } from './entities/seat.entity';
+import { Table } from './entities/table.entity';
 import { CategoryRepository } from './repositories/category/category.repository';
 import { DishRepository } from './repositories/dish/dish.repository';
-import { SeatRepository } from './repositories/seat/seat.repository';
+import { TableRepository } from './repositories/table/table.repository';
 import { CategoryService } from './services/category.service';
 import { DishService } from './services/dish.service';
-import { SeatService } from './services/seat.service';
+import { TableService } from './services/table.service';
 
 @Module({
   imports: [
@@ -18,12 +18,12 @@ import { SeatService } from './services/seat.service';
       CategoryRepository,
       Dish,
       DishRepository,
-      Seat,
-      SeatRepository,
+      Table,
+      TableRepository,
     ]),
   ],
   controllers: [],
-  providers: [CategoryService, DishService, SeatService],
+  providers: [CategoryService, DishService, TableService],
   exports: [],
 })
 export class BackofficeModule {}

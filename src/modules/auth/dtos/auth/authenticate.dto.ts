@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class AuthenticateDTO {
   @ApiProperty({ description: `Account url prefix` })
   @IsString()
   accountUrl: string;
 
-  @ApiProperty({ description: `Account id` })
   @IsNumber()
+  @IsOptional()
   accountId?: number;
 
   @ApiProperty({ description: `User e-mail` })

@@ -13,6 +13,8 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { AccountRepository } from './repositories/account/account.repository';
 import { UserRepository } from './repositories/user/user.repository';
+import { AuthController } from './controllers/auth.controller';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
   imports: [
@@ -31,7 +33,7 @@ import { UserRepository } from './repositories/user/user.repository';
       }),
     }),
   ],
-  controllers: [],
+  controllers: [AuthController, AccountController],
   exports: [JwtModule, PassportModule, AuthService],
   providers: [JwtStrategy, AccountService, AuthService, UserService],
 })

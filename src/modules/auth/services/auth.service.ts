@@ -8,6 +8,7 @@ import { JwtPayload } from 'src/shared/interfaces/jwt-payload.interface';
 import { AuthenticateDTO } from '../dtos/auth/authenticate.dto';
 import { AccountRepository } from '../repositories/account/account.repository';
 import { UserRepository } from '../repositories/user/user.repository';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -33,6 +34,10 @@ export class AuthService {
       accountId: account.id,
     });
 
+    return user;
+  }
+
+  async generateToken(user: User) {
     const payload: JwtPayload = {
       id: user.id,
       name: user.name,

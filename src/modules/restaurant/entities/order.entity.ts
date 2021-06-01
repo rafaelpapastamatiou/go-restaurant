@@ -1,7 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
-import { Seat } from 'src/modules/backoffice/entities/seat.entity';
+import { Table } from 'src/modules/backoffice/entities/table.entity';
 import { OrderDish } from './order-dish.entity';
 
 @Entity('orders')
@@ -9,9 +16,15 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Seat, (seat) => seat.orders)
-  seat: Seat;
-  seatId: number;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
+
+  @ManyToOne(() => Table, (table) => table.orders)
+  table: Table;
+  tableId: number;
 
   @ManyToOne(() => Account, (account) => account.orders)
   account: Account;

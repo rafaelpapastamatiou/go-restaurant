@@ -2,10 +2,12 @@ import {
   BeforeInsert,
   BeforeUpdate,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
@@ -31,8 +33,16 @@ export class User {
   @Column({ type: 'boolean', default: 0 })
   admin: boolean;
 
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
+
   @ManyToOne(() => Account, (account) => account.users)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 
   @OneToMany(() => Invoice, (invoice) => invoice.user)

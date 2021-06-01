@@ -21,5 +21,5 @@ export class CreateAccountDTO {
 
   @ApiProperty({ description: `Account name on url prefix` })
   @IsString()
-  urlName: string;
+  accountUrl: string;
 }
