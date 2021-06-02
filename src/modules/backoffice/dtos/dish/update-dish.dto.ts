@@ -14,6 +14,11 @@ export class UpdateDishRequestDTO {
   @IsString()
   name?: string;
 
+  @ApiProperty({ description: `Dish image url` })
+  @IsString()
+  @IsOptional()
+  imgUrl?: string;
+
   @ApiProperty({ description: `Dish price` })
   @IsOptional()
   @IsNumber()

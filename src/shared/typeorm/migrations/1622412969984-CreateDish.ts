@@ -24,6 +24,12 @@ export default class CreateDish1622412969984 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'imgUrl',
+            type: 'varchar',
+            isNullable: true,
+            default: null,
+          },
+          {
             name: 'accountId',
             type: 'int',
             isNullable: false,
