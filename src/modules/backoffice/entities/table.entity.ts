@@ -27,6 +27,8 @@ export class Table {
 
   @ManyToOne(() => Account, (account) => account.dishes)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 
   @OneToMany(() => Order, (order) => order.table)

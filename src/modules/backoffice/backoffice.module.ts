@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { DishController } from './controllers/dish.controller';
+import { TableController } from './controllers/table.controller';
+import { CategoryController } from './controllers/category.controller';
+
 import { Category } from './entities/category.entity';
 import { Dish } from './entities/dish.entity';
 import { Table } from './entities/table.entity';
@@ -22,7 +26,7 @@ import { TableService } from './services/table.service';
       TableRepository,
     ]),
   ],
-  controllers: [],
+  controllers: [TableController, CategoryController, DishController],
   providers: [CategoryService, DishService, TableService],
   exports: [],
 })

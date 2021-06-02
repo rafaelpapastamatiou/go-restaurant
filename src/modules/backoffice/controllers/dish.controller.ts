@@ -13,46 +13,46 @@ import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
-import { CreateUserRequestDTO } from '../dtos/user/create-user.dto';
-import { UpdateUserRequestDTO } from '../dtos/user/update-user.dto';
-import { User } from '../entities/user.entity';
-import { UserService } from '../services/user.service';
+import { User } from '../../auth/entities/user.entity';
+import { CreateDishRequestDTO } from '../dtos/dish/create-dish.dto';
+import { UpdateDishRequestDTO } from '../dtos/dish/update-dish.dto';
+import { DishService } from '../services/dish.service';
 
 @Injectable()
-@Controller('/users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('/dishes')
+export class DishController {
+  constructor(private readonly dishService: DishService) {}
 
   @Get()
   @UseGuards(AdminGuard)
   async index(@RequestUser() user: User) {
-    const users = await this.userService.findByAccount({
+    const dishes = await this.dishService.findAll({
       accountId: user.account.id,
     });
 
-    return users;
+    return dishes;
   }
 
   @Get('/:id')
   @UseGuards(AdminGuard)
   async show(@Param('id') id: number, @RequestUser() user: User) {
-    const profile = await this.userService.findById({
+    const dish = await this.dishService.findById({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
 
-    return classToClass(profile);
+    return classToClass(dish);
   }
 
   @Post()
   @UseGuards(AdminGuard)
-  async create(@RequestUser() user: User, @Body() data: CreateUserRequestDTO) {
-    const updatedUser = await this.userService.create({
+  async create(@RequestUser() user: User, @Body() data: CreateDishRequestDTO) {
+    const dish = await this.dishService.create({
       accountId: user.account.id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(dish);
   }
 
   @Put('/:id')
@@ -60,23 +60,23 @@ export class UserController {
   async update(
     @Param('id') id: number,
     @RequestUser() user: User,
-    @Body() data: UpdateUserRequestDTO,
+    @Body() data: UpdateDishRequestDTO,
   ) {
-    const updatedUser = await this.userService.update({
+    const dish = await this.dishService.update({
       accountId: user.account.id,
-      userId: id,
+      id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(dish);
   }
 
   @Delete('/:id')
   @UseGuards(AdminGuard)
   async delete(@Param('id') id: number, @RequestUser() user: User) {
-    await this.userService.delete({
+    await this.dishService.delete({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
   }
 }

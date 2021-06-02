@@ -5,6 +5,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  Column,
 } from 'typeorm';
 
 import { Account } from 'src/modules/auth/entities/account.entity';
@@ -24,10 +25,14 @@ export class Order {
 
   @ManyToOne(() => Table, (table) => table.orders)
   table: Table;
+
+  @Column({ type: 'int' })
   tableId: number;
 
   @ManyToOne(() => Account, (account) => account.orders)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 
   @OneToMany(() => OrderDish, (orderDish) => orderDish.order)

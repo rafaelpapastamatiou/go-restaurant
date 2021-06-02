@@ -2,9 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsString, IsBoolean, IsOptional, IsNumber } from 'class-validator';
 
+import { Mixin } from 'ts-mixer';
+
 import { UserIdentifierDTO } from 'src/shared/dtos/user/user-identifier.dto';
 
-export class UpdateUserDTO extends UserIdentifierDTO {
+export class UpdateUserRequestDTO {
   @ApiProperty({ description: `User name` })
   @IsOptional()
   @IsString()
@@ -34,3 +36,8 @@ export class UpdateUserDTO extends UserIdentifierDTO {
   @IsNumber()
   currentUserId?: number;
 }
+
+export class UpdateUserDTO extends Mixin(
+  UserIdentifierDTO,
+  UpdateUserRequestDTO,
+) {}

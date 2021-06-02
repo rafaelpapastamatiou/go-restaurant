@@ -13,46 +13,46 @@ import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
-import { CreateUserRequestDTO } from '../dtos/user/create-user.dto';
-import { UpdateUserRequestDTO } from '../dtos/user/update-user.dto';
-import { User } from '../entities/user.entity';
-import { UserService } from '../services/user.service';
+import { User } from '../../auth/entities/user.entity';
+import { CreateTableRequestDTO } from '../dtos/table/create-table.dto';
+import { UpdateTableRequestDTO } from '../dtos/table/update-table.dto';
+import { TableService } from '../services/table.service';
 
 @Injectable()
-@Controller('/users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('/tables')
+export class TableController {
+  constructor(private readonly tableService: TableService) {}
 
   @Get()
   @UseGuards(AdminGuard)
   async index(@RequestUser() user: User) {
-    const users = await this.userService.findByAccount({
+    const tables = await this.tableService.findAll({
       accountId: user.account.id,
     });
 
-    return users;
+    return tables;
   }
 
   @Get('/:id')
   @UseGuards(AdminGuard)
   async show(@Param('id') id: number, @RequestUser() user: User) {
-    const profile = await this.userService.findById({
+    const table = await this.tableService.findById({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
 
-    return classToClass(profile);
+    return classToClass(table);
   }
 
   @Post()
   @UseGuards(AdminGuard)
-  async create(@RequestUser() user: User, @Body() data: CreateUserRequestDTO) {
-    const updatedUser = await this.userService.create({
+  async create(@RequestUser() user: User, @Body() data: CreateTableRequestDTO) {
+    const table = await this.tableService.create({
       accountId: user.account.id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(table);
   }
 
   @Put('/:id')
@@ -60,23 +60,23 @@ export class UserController {
   async update(
     @Param('id') id: number,
     @RequestUser() user: User,
-    @Body() data: UpdateUserRequestDTO,
+    @Body() data: UpdateTableRequestDTO,
   ) {
-    const updatedUser = await this.userService.update({
+    const table = await this.tableService.update({
       accountId: user.account.id,
-      userId: id,
+      id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(table);
   }
 
   @Delete('/:id')
   @UseGuards(AdminGuard)
   async delete(@Param('id') id: number, @RequestUser() user: User) {
-    await this.userService.delete({
+    await this.tableService.delete({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
   }
 }

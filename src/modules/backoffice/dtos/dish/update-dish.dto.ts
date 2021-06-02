@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-
 import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { Mixin } from 'ts-mixer';
 
 import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 
-export class UpdateDishDTO extends AccountIdentifierDTO {
+export class UpdateDishRequestDTO {
   @ApiProperty({ description: `Dish id` })
   @IsNumber()
   id: number;
@@ -24,3 +24,8 @@ export class UpdateDishDTO extends AccountIdentifierDTO {
   @IsNumber()
   categoryId?: number;
 }
+
+export class UpdateDishDTO extends Mixin(
+  UpdateDishRequestDTO,
+  AccountIdentifierDTO,
+) {}

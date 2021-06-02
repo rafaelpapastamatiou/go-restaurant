@@ -31,10 +31,14 @@ export class Dish {
 
   @ManyToOne(() => Category, (category) => category.dishes)
   category: Category;
+
+  @Column({ type: 'int' })
   categoryId: number;
 
   @ManyToOne(() => Account, (account) => account.dishes)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 
   @OneToMany(() => OrderDish, (orderDish) => orderDish.dish)

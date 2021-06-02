@@ -13,46 +13,49 @@ import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
-import { CreateUserRequestDTO } from '../dtos/user/create-user.dto';
-import { UpdateUserRequestDTO } from '../dtos/user/update-user.dto';
-import { User } from '../entities/user.entity';
-import { UserService } from '../services/user.service';
+import { User } from '../../auth/entities/user.entity';
+import { CreateCategoryRequestDTO } from '../dtos/category/create-category.dto';
+import { UpdateCategoryRequestDTO } from '../dtos/category/update-category.dto';
+import { CategoryService } from '../services/category.service';
 
 @Injectable()
-@Controller('/users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('/categories')
+export class CategoryController {
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
   @UseGuards(AdminGuard)
   async index(@RequestUser() user: User) {
-    const users = await this.userService.findByAccount({
+    const categories = await this.categoryService.findAll({
       accountId: user.account.id,
     });
 
-    return users;
+    return categories;
   }
 
   @Get('/:id')
   @UseGuards(AdminGuard)
   async show(@Param('id') id: number, @RequestUser() user: User) {
-    const profile = await this.userService.findById({
+    const category = await this.categoryService.findById({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
 
-    return classToClass(profile);
+    return classToClass(category);
   }
 
   @Post()
   @UseGuards(AdminGuard)
-  async create(@RequestUser() user: User, @Body() data: CreateUserRequestDTO) {
-    const updatedUser = await this.userService.create({
+  async create(
+    @RequestUser() user: User,
+    @Body() data: CreateCategoryRequestDTO,
+  ) {
+    const category = await this.categoryService.create({
       accountId: user.account.id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(category);
   }
 
   @Put('/:id')
@@ -60,23 +63,23 @@ export class UserController {
   async update(
     @Param('id') id: number,
     @RequestUser() user: User,
-    @Body() data: UpdateUserRequestDTO,
+    @Body() data: UpdateCategoryRequestDTO,
   ) {
-    const updatedUser = await this.userService.update({
+    const category = await this.categoryService.update({
       accountId: user.account.id,
-      userId: id,
+      id,
       ...data,
     });
 
-    return classToClass(updatedUser);
+    return classToClass(category);
   }
 
   @Delete('/:id')
   @UseGuards(AdminGuard)
   async delete(@Param('id') id: number, @RequestUser() user: User) {
-    await this.userService.delete({
+    await this.categoryService.delete({
       accountId: user.account.id,
-      userId: id,
+      id,
     });
   }
 }

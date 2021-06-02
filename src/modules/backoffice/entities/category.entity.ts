@@ -30,5 +30,7 @@ export class Category {
 
   @ManyToOne(() => Account, (account) => account.categories)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 }

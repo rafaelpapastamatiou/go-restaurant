@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsString, IsBoolean } from 'class-validator';
+import { IsString, IsBoolean, IsOptional } from 'class-validator';
+
+import { Mixin } from 'ts-mixer';
 
 import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 
-export class CreateUserDTO extends AccountIdentifierDTO {
+export class CreateUserRequestDTO {
   @ApiProperty({ description: `User name` })
   @IsString()
   name: string;
@@ -19,5 +21,11 @@ export class CreateUserDTO extends AccountIdentifierDTO {
 
   @ApiProperty({ description: `User is admin` })
   @IsBoolean()
+  @IsOptional()
   admin: boolean;
 }
+
+export class CreateUserDTO extends Mixin(
+  AccountIdentifierDTO,
+  CreateUserRequestDTO,
+) {}

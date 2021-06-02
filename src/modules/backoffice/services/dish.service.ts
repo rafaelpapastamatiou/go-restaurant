@@ -27,6 +27,7 @@ export class DishService {
   }
 
   async create(data: CreateDishDTO): Promise<Dish> {
+    console.log(data);
     const dish = await this.dishRepository.createDish(data);
 
     return dish;

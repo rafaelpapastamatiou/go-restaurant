@@ -29,6 +29,8 @@ export class Invoice {
 
   @ManyToOne(() => Account, (account) => account.invoices)
   account: Account;
+
+  @Column({ type: 'int' })
   accountId: number;
 
   @ManyToOne(() => User, (user) => user.invoices)

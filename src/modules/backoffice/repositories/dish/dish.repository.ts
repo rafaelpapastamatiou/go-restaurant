@@ -18,6 +18,7 @@ export class DishRepository
         id,
         accountId,
       },
+      relations: ['category'],
     });
 
     return dish;
@@ -28,23 +29,14 @@ export class DishRepository
       where: {
         accountId,
       },
+      relations: ['category'],
     });
 
     return dishes;
   }
 
-  async createDish({
-    accountId,
-    name,
-    price,
-    categoryId,
-  }: CreateDishDTO): Promise<Dish> {
-    const dish = this.create({
-      accountId,
-      name,
-      price,
-      categoryId,
-    });
+  async createDish(data: CreateDishDTO): Promise<Dish> {
+    const dish = this.create(data);
 
     await this.save(dish);
 

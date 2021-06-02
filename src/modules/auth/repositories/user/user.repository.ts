@@ -113,7 +113,10 @@ export class UserRepository
         email,
       });
 
-      if (userWithSameEmailAlreadyExists) {
+      if (
+        userWithSameEmailAlreadyExists &&
+        userWithSameEmailAlreadyExists.id !== user.id
+      ) {
         throw new HttpException(
           'User with same email already exists',
           HttpStatus.BAD_REQUEST,
