@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -12,6 +12,7 @@ import { JwtAuthGuard } from './shared/guards/jwt-auth.guard';
 
 import { configuration } from './config/configuration';
 import * as ormconfig from './config/ormconfig';
+import { AccountInterceptor } from './shared/interceptors/account.interceptor';
 
 @Module({
   imports: [
@@ -37,6 +38,10 @@ import * as ormconfig from './config/ormconfig';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AccountInterceptor,
     },
   ],
 })

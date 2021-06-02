@@ -9,6 +9,7 @@ import { AuthenticateDTO } from '../dtos/auth/authenticate.dto';
 import { AccountRepository } from '../repositories/account/account.repository';
 import { UserRepository } from '../repositories/user/user.repository';
 import { User } from '../entities/user.entity';
+import { UserIdentifierDTO } from 'src/shared/dtos/user/user-identifier.dto';
 
 @Injectable()
 export class AuthService {
@@ -43,11 +44,24 @@ export class AuthService {
       name: user.name,
       email: user.email,
       account: user.account,
+      admin: user.admin,
     };
 
     return {
       token: this.jwtService.sign(payload),
       user: classToClass(user),
     };
+  }
+
+  async checkIfAdmin({ userId, accountId }: UserIdentifierDTO) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+        accountId,
+        admin: true,
+      },
+    });
+
+    return !!user;
   }
 }

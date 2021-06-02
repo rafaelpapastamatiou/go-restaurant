@@ -5,4 +5,5 @@ export interface JwtPayload {
   name: string;
   email: string;
   account: Account;
+  admin?: boolean;
 }

@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Injectable,
-  Post,
-  Body,
-  HttpException,
-} from '@nestjs/common';
+import { Controller, Injectable, Post, Body } from '@nestjs/common';
 
 import { Public } from 'src/shared/decorators/public.decorator';
 import { CreateAccountDTO } from '../dtos/account/create-account.dto';

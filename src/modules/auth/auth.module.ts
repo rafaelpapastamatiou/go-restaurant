@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
@@ -15,7 +15,9 @@ import { AccountRepository } from './repositories/account/account.repository';
 import { UserRepository } from './repositories/user/user.repository';
 import { AuthController } from './controllers/auth.controller';
 import { AccountController } from './controllers/account.controller';
+import { UserController } from './controllers/user.controller';
 
+@Global()
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -33,8 +35,8 @@ import { AccountController } from './controllers/account.controller';
       }),
     }),
   ],
-  controllers: [AuthController, AccountController],
-  exports: [JwtModule, PassportModule, AuthService],
+  controllers: [AuthController, AccountController, UserController],
+  exports: [JwtModule, PassportModule, AuthService, AccountService],
   providers: [JwtStrategy, AccountService, AuthService, UserService],
 })
 export class AuthModule {}
