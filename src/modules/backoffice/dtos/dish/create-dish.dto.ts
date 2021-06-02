@@ -12,7 +12,7 @@ export class CreateDishRequestDTO {
   @ApiProperty({ description: `Dish image url` })
   @IsString()
   @IsOptional()
-  imgUrl?: string;
+  imageUrl?: string;
 
   @ApiProperty({ description: `Dish price` })
   @IsNumber()

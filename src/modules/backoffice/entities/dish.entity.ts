@@ -24,7 +24,7 @@ export class Dish {
   price: number;
 
   @Column({ nullable: true, default: null })
-  imgUrl: string;
+  imageUrl: string;
 
   @CreateDateColumn()
   createdAt: string;
