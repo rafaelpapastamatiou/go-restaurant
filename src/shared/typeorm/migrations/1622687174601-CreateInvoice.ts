@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateInvoice1622413975101 implements MigrationInterface {
+export default class CreateInvoice1622687174601 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -34,6 +34,11 @@ export default class CreateInvoice1622413975101 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'orderId',
+            type: 'int',
+            isNullable: false,
+          },
+          {
             name: 'createdAt',
             type: 'datetime',
             isNullable: false,
@@ -62,6 +67,14 @@ export default class CreateInvoice1622413975101 implements MigrationInterface {
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
             name: 'InvoiceUser',
+          },
+          {
+            columnNames: ['orderId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'orders',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+            name: 'InvoiceOrder',
           },
         ],
       }),
