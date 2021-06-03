@@ -9,6 +9,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
+import { ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -16,6 +17,7 @@ import { AdminGuard } from 'src/shared/guards/admin.guard';
 import { User } from '../../auth/entities/user.entity';
 import { CreateCategoryRequestDTO } from '../dtos/category/create-category.dto';
 import { UpdateCategoryRequestDTO } from '../dtos/category/update-category.dto';
+import { Category } from '../entities/category.entity';
 import { CategoryService } from '../services/category.service';
 
 @Injectable()
@@ -25,6 +27,7 @@ export class CategoryController {
 
   @Get()
   @UseGuards(AdminGuard)
+  @ApiOkResponse({ type: Category, isArray: true })
   async index(@RequestUser() user: User) {
     const categories = await this.categoryService.findAll({
       accountId: user.account.id,
@@ -35,6 +38,7 @@ export class CategoryController {
 
   @Get('/:id')
   @UseGuards(AdminGuard)
+  @ApiOkResponse({ type: Category })
   async show(@Param('id') id: number, @RequestUser() user: User) {
     const category = await this.categoryService.findById({
       accountId: user.account.id,
@@ -46,6 +50,7 @@ export class CategoryController {
 
   @Post()
   @UseGuards(AdminGuard)
+  @ApiOkResponse({ type: Category })
   async create(
     @RequestUser() user: User,
     @Body() data: CreateCategoryRequestDTO,
@@ -60,6 +65,7 @@ export class CategoryController {
 
   @Put('/:id')
   @UseGuards(AdminGuard)
+  @ApiOkResponse({ type: Category })
   async update(
     @Param('id') id: number,
     @RequestUser() user: User,
@@ -76,6 +82,7 @@ export class CategoryController {
 
   @Delete('/:id')
   @UseGuards(AdminGuard)
+  @ApiNoContentResponse()
   async delete(@Param('id') id: number, @RequestUser() user: User) {
     await this.categoryService.delete({
       accountId: user.account.id,

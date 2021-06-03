@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 import { Repository, EntityRepository } from 'typeorm';
-import { CreateOrderDTO } from '../../dtos/order/create-order.dto';
+import { CreateOrderEntityDTO } from '../../dtos/order/create-order.dto';
 import { OrderIdentifierDTO } from '../../dtos/order/order-identifier.dto';
 
 import { Order } from '../../entities/order.entity';
@@ -14,6 +14,14 @@ export class OrderRepository
   async findAll({ accountId }: AccountIdentifierDTO): Promise<Order[]> {
     const orders = await this.find({
       where: { accountId },
+    });
+
+    return orders;
+  }
+
+  async findAllPending({ accountId }: AccountIdentifierDTO): Promise<Order[]> {
+    const orders = await this.find({
+      where: { accountId, finished: false },
     });
 
     return orders;
@@ -36,17 +44,25 @@ export class OrderRepository
   async createOrder({
     accountId,
     tableId,
-    orderDishes,
-  }: CreateOrderDTO): Promise<Order> {
+  }: CreateOrderEntityDTO): Promise<Order> {
     const order = this.create({
       accountId,
       tableId,
-      orderDishes,
     });
 
     await this.save(order);
 
     return order;
+  }
+
+  async finishOrder(order: Order): Promise<Order> {
+    const finishedOrder = Object.assign(order, {
+      finished: true,
+    });
+
+    await this.save(finishedOrder);
+
+    return finishedOrder;
   }
 
   async deleteOrder({ id, accountId }: OrderIdentifierDTO): Promise<void> {

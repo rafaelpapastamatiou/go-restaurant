@@ -5,10 +5,6 @@ import { Mixin } from 'ts-mixer';
 import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 
 export class UpdateDishRequestDTO {
-  @ApiProperty({ description: `Dish id` })
-  @IsNumber()
-  id: number;
-
   @ApiProperty({ description: `Dish name` })
   @IsOptional()
   @IsString()
@@ -33,4 +29,8 @@ export class UpdateDishRequestDTO {
 export class UpdateDishDTO extends Mixin(
   UpdateDishRequestDTO,
   AccountIdentifierDTO,
-) {}
+) {
+  @ApiProperty({ description: `Dish id` })
+  @IsNumber()
+  id: number;
+}

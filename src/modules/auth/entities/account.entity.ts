@@ -12,24 +12,31 @@ import { Category } from 'src/modules/backoffice/entities/category.entity';
 import { Dish } from 'src/modules/backoffice/entities/dish.entity';
 import { Order } from 'src/modules/restaurant/entities/order.entity';
 import { Invoice } from 'src/modules/restaurant/entities/invoice.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('accounts')
 export class Account {
+  @ApiProperty({ description: 'Account id' })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ description: 'Account name' })
   @Column()
   name: string;
 
+  @ApiProperty({ description: 'Account trade name' })
   @Column()
   tradeName: string;
 
+  @ApiProperty({ description: 'Account url' })
   @Column()
   accountUrl: string;
 
+  @ApiProperty({ description: 'Account created at' })
   @CreateDateColumn()
   createdAt: string;
 
+  @ApiProperty({ description: 'Account updated at', nullable: true })
   @UpdateDateColumn()
   updatedAt: string;
 

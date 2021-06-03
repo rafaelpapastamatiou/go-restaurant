@@ -9,6 +9,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
+import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -24,6 +25,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @ApiOkResponse({ type: User, isArray: true })
   @UseGuards(AdminGuard)
   async index(@RequestUser() user: User) {
     const users = await this.userService.findByAccount({
@@ -34,6 +36,7 @@ export class UserController {
   }
 
   @Get('/:id')
+  @ApiOkResponse({ type: User })
   @UseGuards(AdminGuard)
   async show(@Param('id') id: number, @RequestUser() user: User) {
     const profile = await this.userService.findById({
@@ -45,6 +48,7 @@ export class UserController {
   }
 
   @Post()
+  @ApiOkResponse({ type: User })
   @UseGuards(AdminGuard)
   async create(@RequestUser() user: User, @Body() data: CreateUserRequestDTO) {
     const updatedUser = await this.userService.create({
@@ -56,6 +60,7 @@ export class UserController {
   }
 
   @Put('/:id')
+  @ApiOkResponse({ type: User })
   @UseGuards(AdminGuard)
   async update(
     @Param('id') id: number,

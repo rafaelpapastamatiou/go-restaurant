@@ -29,18 +29,8 @@ export class InvoiceRepository
     return invoice;
   }
 
-  async createInvoice({
-    accountId,
-    client,
-    userId,
-    value,
-  }: CreateInvoiceDTO): Promise<Invoice> {
-    const invoice = this.create({
-      accountId,
-      userId,
-      client,
-      value,
-    });
+  async createInvoice(data: CreateInvoiceDTO): Promise<Invoice> {
+    const invoice = this.create(data);
 
     await this.save(invoice);
 

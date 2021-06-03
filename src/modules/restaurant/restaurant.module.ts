@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { InvoiceController } from './controllers/invoice.controller';
+import { OrderFinishController } from './controllers/order-finish.controller';
+import { OrderPendingController } from './controllers/order-pending.controller';
+import { OrderController } from './controllers/order.controller';
 import { Invoice } from './entities/invoice.entity';
 import { OrderDish } from './entities/order-dish.entity';
 import { Order } from './entities/order.entity';
 import { InvoiceRepository } from './repositories/invoice/invoice.repository';
 import { OrderRepository } from './repositories/order/order.repository';
-import { OrderDishRepository } from './repositories/orderDish/order-dish.repository';
 import { InvoiceService } from './services/invoice.service';
-import { OrderDishService } from './services/order-dish.service';
 import { OrderService } from './services/order.service';
 
 @Module({
@@ -17,13 +19,17 @@ import { OrderService } from './services/order.service';
       Order,
       OrderRepository,
       OrderDish,
-      OrderDishRepository,
       Invoice,
       InvoiceRepository,
     ]),
   ],
-  controllers: [],
-  providers: [OrderService, OrderDishService, InvoiceService],
+  controllers: [
+    OrderController,
+    OrderFinishController,
+    OrderPendingController,
+    InvoiceController,
+  ],
+  providers: [OrderService, InvoiceService],
   exports: [],
 })
 export class RestaurantModule {}

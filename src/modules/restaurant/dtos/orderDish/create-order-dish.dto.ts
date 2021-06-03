@@ -1,12 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateOrderDishDTO {
-  @ApiProperty({ description: `Order id` })
-  @IsNumber()
-  orderId: number;
-
+export class CreateOrderDishRequestDTO {
   @ApiProperty({ description: `Dish id` })
   @IsNumber()
   dishId: number;
@@ -15,8 +10,8 @@ export class CreateOrderDishDTO {
   @IsNumber()
   quantity: number;
 
-  @ApiProperty({ description: `Dish note` })
-  @IsOptional()
+  @ApiProperty({ description: `Note`, required: false })
   @IsString()
+  @IsOptional()
   note?: string;
 }

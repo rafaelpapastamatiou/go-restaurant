@@ -14,6 +14,12 @@ export default class CreateOrder1622414076738 implements MigrationInterface {
             isGenerated: true,
           },
           {
+            name: 'finished',
+            type: 'boolean',
+            isNullable: false,
+            default: false,
+          },
+          {
             name: 'tableId',
             type: 'int',
             isNullable: false,

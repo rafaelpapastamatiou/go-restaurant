@@ -5,10 +5,6 @@ import { Mixin } from 'ts-mixer';
 import { AccountIdentifierDTO } from 'src/shared/dtos/account/account-identifier.dto';
 
 export class UpdateCategoryRequestDTO {
-  @ApiProperty({ description: `Category id` })
-  @IsNumber()
-  id: number;
-
   @ApiProperty({ description: `Category name` })
   @IsOptional()
   @IsString()
@@ -18,4 +14,8 @@ export class UpdateCategoryRequestDTO {
 export class UpdateCategoryDTO extends Mixin(
   UpdateCategoryRequestDTO,
   AccountIdentifierDTO,
-) {}
+) {
+  @ApiProperty({ description: `Category id` })
+  @IsNumber()
+  id: number;
+}
