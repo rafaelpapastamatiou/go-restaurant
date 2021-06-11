@@ -1,5 +1,5 @@
 import { Controller, Injectable, Get, Param } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -8,6 +8,7 @@ import { Invoice } from '../entities/invoice.entity';
 import { InvoiceService } from '../services/invoice.service';
 
 @Injectable()
+@ApiTags('restaurant')
 @Controller('/invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}

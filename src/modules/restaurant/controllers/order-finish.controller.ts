@@ -1,5 +1,5 @@
 import { Body, Controller, Injectable, Param, Post } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
 import { User } from '../../auth/entities/user.entity';
@@ -9,6 +9,7 @@ import { InvoiceService } from '../services/invoice.service';
 import { OrderService } from '../services/order.service';
 
 @Injectable()
+@ApiTags('restaurant')
 @Controller('/orders/:id/finish')
 export class OrderFinishController {
   constructor(

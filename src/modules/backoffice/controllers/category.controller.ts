@@ -9,7 +9,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -21,6 +21,7 @@ import { Category } from '../entities/category.entity';
 import { CategoryService } from '../services/category.service';
 
 @Injectable()
+@ApiTags('backoffice')
 @Controller('/categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}

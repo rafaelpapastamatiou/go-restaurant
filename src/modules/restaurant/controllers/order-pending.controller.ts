@@ -1,5 +1,5 @@
 import { Controller, Get, Injectable, UseGuards } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
@@ -8,6 +8,7 @@ import { Order } from '../entities/order.entity';
 import { OrderService } from '../services/order.service';
 
 @Injectable()
+@ApiTags('restaurant')
 @Controller('/ordersPending')
 export class OrderPendingController {
   constructor(private readonly orderService: OrderService) {}

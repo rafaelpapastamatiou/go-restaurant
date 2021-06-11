@@ -7,7 +7,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -18,6 +18,7 @@ import { Order } from '../entities/order.entity';
 import { OrderService } from '../services/order.service';
 
 @Injectable()
+@ApiTags('restaurant')
 @Controller('/orders')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}

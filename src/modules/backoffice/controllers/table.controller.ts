@@ -9,7 +9,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -21,6 +21,7 @@ import { Table } from '../entities/table.entity';
 import { TableService } from '../services/table.service';
 
 @Injectable()
+@ApiTags('backoffice')
 @Controller('/tables')
 export class TableController {
   constructor(private readonly tableService: TableService) {}

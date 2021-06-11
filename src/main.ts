@@ -15,6 +15,10 @@ async function bootstrap() {
     .setTitle('GoRestaurant')
     .setDescription('GoRestaurant API')
     .setVersion('1.0')
+    .addTag('account')
+    .addTag('users')
+    .addTag('auth')
+    .addTag('backoffice')
     .addTag('restaurant')
     .build();
 

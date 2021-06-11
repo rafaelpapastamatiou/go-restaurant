@@ -5,7 +5,7 @@ import {
   Body,
   HttpException,
 } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { Public } from 'src/shared/decorators/public.decorator';
 
@@ -14,6 +14,7 @@ import { UserAuthenticatedDTO } from '../dtos/auth/user-authenticated.dto';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
+@ApiTags('auth')
 @Controller('/signin')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

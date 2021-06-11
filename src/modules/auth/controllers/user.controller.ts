@@ -9,7 +9,7 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { classToClass } from 'class-transformer';
 
 import { RequestUser } from 'src/shared/decorators/request-user.decorator';
@@ -20,6 +20,7 @@ import { User } from '../entities/user.entity';
 import { UserService } from '../services/user.service';
 
 @Injectable()
+@ApiTags('users')
 @Controller('/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
